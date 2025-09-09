@@ -1,0 +1,15 @@
+﻿  ConsoleApplication1.cpp
+E:\2 курс\ЛАвИC\лаба1\ConsoleApplication1.cpp(39,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+E:\2 курс\ЛАвИC\лаба1\ConsoleApplication1.cpp(352,29): warning C4477: "wprintf": в строке форматирования "%ls" требуется аргумент типа "wchar_t *", но вариативный аргумент "1" имеет тип "char *"
+E:\2 курс\ЛАвИC\лаба1\ConsoleApplication1.cpp(352,29): message : рекомендуется использовать "%hs" в строке форматирования
+E:\2 курс\ЛАвИC\лаба1\ConsoleApplication1.cpp(352,29): message : рекомендуется использовать "%Ts" в строке форматирования
+E:\2 курс\ЛАвИC\лаба1\ConsoleApplication1.cpp(352,29): warning C4477: "wprintf": в строке форматирования "%ls" требуется аргумент типа "wchar_t *", но вариативный аргумент "2" имеет тип "char *"
+E:\2 курс\ЛАвИC\лаба1\ConsoleApplication1.cpp(352,29): message : рекомендуется использовать "%hs" в строке форматирования
+E:\2 курс\ЛАвИC\лаба1\ConsoleApplication1.cpp(352,29): message : рекомендуется использовать "%Ts" в строке форматирования
+E:\2 курс\ЛАвИC\лаба1\ConsoleApplication1.cpp(366,29): warning C4477: "wprintf": в строке форматирования "%ls" требуется аргумент типа "wchar_t *", но вариативный аргумент "1" имеет тип "char *"
+E:\2 курс\ЛАвИC\лаба1\ConsoleApplication1.cpp(366,29): message : рекомендуется использовать "%hs" в строке форматирования
+E:\2 курс\ЛАвИC\лаба1\ConsoleApplication1.cpp(366,29): message : рекомендуется использовать "%Ts" в строке форматирования
+E:\2 курс\ЛАвИC\лаба1\ConsoleApplication1.cpp(366,29): warning C4477: "wprintf": в строке форматирования "%ls" требуется аргумент типа "wchar_t *", но вариативный аргумент "2" имеет тип "char *"
+E:\2 курс\ЛАвИC\лаба1\ConsoleApplication1.cpp(366,29): message : рекомендуется использовать "%hs" в строке форматирования
+E:\2 курс\ЛАвИC\лаба1\ConsoleApplication1.cpp(366,29): message : рекомендуется использовать "%Ts" в строке форматирования
+  ConsoleApplication1.vcxproj -> E:\2 курс\ЛАвИC\лаба1\Debug\ConsoleApplication1.exe
