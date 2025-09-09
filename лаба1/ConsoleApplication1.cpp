@@ -5,13 +5,11 @@
 #include <time.h>
 #include <ctype.h>
 #include <locale.h>
-#include <wchar.h>
 
 #define MAX_STUDENTS 100
 #define MAX_NAME_LENGTH 50
 #define MAX_ROWS 10
 #define MAX_COLS 10
-
 
 typedef struct {
     char surname[MAX_NAME_LENGTH];
@@ -20,13 +18,12 @@ typedef struct {
     float average_grade;
 } Student;
 
-
 void array_range_difference();
 void random_array_init();
 void custom_size_array();
 void matrix_row_column_sum();
 void search_student();
-
+void dynamic_square_array(); 
 
 void print_array(int arr[], int size);
 int get_int_input(const char* prompt, int min_val, int max_val);
@@ -36,7 +33,7 @@ int main() {
     setlocale(LC_ALL, "");
     int choice;
 
-    srand(time(NULL)); 
+    srand(time(NULL));
 
     do {
         printf("\n=== МЕНЮ ПРОГРАММЫ ===\n");
@@ -45,12 +42,13 @@ int main() {
         printf("3. Динамичный массив\n");
         printf("4. Сумма значений строки/столбцы\n");
         printf("5. Ввод данных студентов\n");
+        printf("6. Двумерный динамический массив\n"); 
         printf("0. Выход\n");
         printf("Выберите пункт меню: ");
 
         if (scanf("%d", &choice) != 1) {
             printf("Ошибка ввода! Пожалуйста, введите число.\n");
-            while (getchar() != '\n'); 
+            while (getchar() != '\n');
             continue;
         }
 
@@ -70,6 +68,9 @@ int main() {
         case 5:
             search_student();
             break;
+        case 6:
+            dynamic_square_array(); 
+            break;
         case 0:
             printf("Выход из программы...\n");
             break;
@@ -77,12 +78,20 @@ int main() {
             printf("Неверный выбор! Попробуйте снова.\n");
         }
 
-
         while (getchar() != '\n');
 
     } while (choice != 0);
 
     return 0;
+}
+
+void print_array(int arr[], int size) {
+    printf("[");
+    for (int i = 0; i < size; i++) {
+        printf("%d", arr[i]);
+        if (i < size - 1) printf(", ");
+    }
+    printf("]\n");
 }
 
 int get_int_input(const char* prompt, int min_val, int max_val) {
@@ -318,7 +327,8 @@ void search_student() {
 
             printf("\nРезультаты поиска по фамилии '%s':\n", search_surname);
             for (int i = 0; i < count; i++) {
-                if (strcmp(students[i].surname, search_surname) == 0) {
+                // Поиск по неполному совпадению с помощью strstr
+                if (strstr(students[i].surname, search_surname) != NULL) {
                     printf("Найден: %s %s, возраст: %d, средний балл: %.1f\n",
                         students[i].surname, students[i].name,
                         students[i].age, students[i].average_grade);
@@ -334,7 +344,8 @@ void search_student() {
 
             printf("\nРезультаты поиска по имени '%s':\n", search_name);
             for (int i = 0; i < count; i++) {
-                if (strcmp(students[i].name, search_name) == 0) {
+                // Поиск по неполному совпадению с помощью strstr
+                if (strstr(students[i].name, search_name) != NULL) {
                     printf("Найден: %s %s, возраст: %d, средний балл: %.1f\n",
                         students[i].surname, students[i].name,
                         students[i].age, students[i].average_grade);
@@ -349,7 +360,7 @@ void search_student() {
             printf("\nРезультаты поиска по возрасту %d:\n", search_age);
             for (int i = 0; i < count; i++) {
                 if (students[i].age == search_age) {
-                    wprintf(L"Найден: %ls %ls, возраст: %d, средний балл: %.1f\n",
+                    printf("Найден: %s %s, возраст: %d, средний балл: %.1f\n",
                         students[i].surname, students[i].name,
                         students[i].age, students[i].average_grade);
                     found = 1;
@@ -363,7 +374,7 @@ void search_student() {
             printf("\nРезультаты поиска по среднему баллу %.1f:\n", search_grade);
             for (int i = 0; i < count; i++) {
                 if (students[i].average_grade == search_grade) {
-                    wprintf(L"Найден: %ls %ls, возраст: %d, средний балл: %.1f\n",
+                    printf("Найден: %s %s, возраст: %d, средний балл: %.1f\n",
                         students[i].surname, students[i].name,
                         students[i].age, students[i].average_grade);
                     found = 1;
@@ -380,18 +391,62 @@ void search_student() {
             printf("Студенты с указанными параметрами не найдены.\n");
         }
 
-
         while (getchar() != '\n');
 
     } while (search_choice != 0);
 }
+void dynamic_square_array() {
+    printf("\n=== Двумерный динамический квадратный массив ===\n");
 
+    int size = get_int_input("Введите размер квадратного массива (1-20): ", 1, 20);
 
-void print_array(int arr[], int size) {
-    printf("[");
-    for (int i = 0; i < size; i++) {
-        printf("%d", arr[i]);
-        if (i < size - 1) printf(", ");
+   
+    int** array = (int**)malloc(size * sizeof(int*));
+    if (array == NULL) {
+        printf("Ошибка выделения памяти!\n");
+        return;
     }
-    printf("]\n");
+
+    for (int i = 0; i < size; i++) {
+        array[i] = (int*)malloc(size * sizeof(int));
+        if (array[i] == NULL) {
+            printf("Ошибка выделения памяти!\n");
+      
+            for (int j = 0; j < i; j++) {
+                free(array[j]);
+            }
+            free(array);
+            return;
+        }
+    }
+
+
+    printf("\nСгенерированный массив %dx%d:\n", size, size);
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            array[i][j] = rand() % 31 - 10; 
+            printf("%4d", array[i][j]);
+        }
+        printf("\n");
+    }
+
+    int zeroCount = 0;
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            if (array[i][j] == 0) {
+                zeroCount++;
+            }
+        }
+    }
+
+    printf("\nКоличество нулевых элементов: %d\n", zeroCount);
+
+
+    for (int i = 0; i < size; i++) {
+        free(array[i]);
+    }
+    free(array);
+
+    printf("Память успешно освобождена.\n");
 }
+
